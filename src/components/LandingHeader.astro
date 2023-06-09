@@ -1,0 +1,102 @@
+---
+import Logo from "./Logo.astro";
+---
+
+<header
+	id="landing-header"
+	class="py-3 px-10 flex items-center fixed top-0 w-full justify-between z-40 text-white"
+>
+	<div class="flex flex-grow basis-0">
+		<Logo />
+	</div>
+
+	<nav class="hidden xl:block sm:hidden">
+		<ul class="flex text-sm">
+			<li>
+				<a
+					class="inline-block px-4 py-2 font-medium text-current transition-colors duration-500"
+					href="#">Model S</a
+				>
+			</li>
+			<li>
+				<a
+					class="inline-block px-4 py-2 font-medium text-current transition-colors duration-500"
+					href="#">Model 3</a
+				>
+			</li>
+			<li>
+				<a
+					class="inline-block px-4 py-2 font-medium text-current transition-colors duration-500"
+					href="#">Model X</a
+				>
+			</li>
+			<li>
+				<a
+					class="inline-block px-4 py-2 font-medium text-current transition-colors duration-500"
+					href="#">Model Y</a
+				>
+			</li>
+			<li>
+				<a
+					class="inline-block px-4 py-2 font-medium text-current transition-colors duration-500"
+					href="#">Solar Roof</a
+				>
+			</li>
+			<li>
+				<a
+					class="inline-block px-4 py-2 font-medium text-current transition-colors duration-500"
+					href="#">Solar Panels</a
+				>
+			</li>
+			<li>
+				<a class="inline-block px-4 py-2 font-medium" href="#">Powerwall</a>
+			</li>
+		</ul>
+	</nav>
+
+	<nav class="flex flex-grow justify-end basis-0">
+		<ul class="flex text-sm">
+			<li>
+				<a
+					class="inline-block px-4 py-2 font-medium text-current transition-colors duration-500"
+					href="#">Shop</a
+				>
+			</li>
+			<li>
+				<a
+					class="inline-block px-4 py-2 font-medium text-current transition-colors duration-500"
+					href="#">Account</a
+				>
+			</li>
+			<li>
+				<a
+					class="inline-block px-4 py-2 font-medium text-current transition-colors duration-500"
+					href="#">Menu</a
+				>
+			</li>
+		</ul>
+	</nav>
+</header>
+
+<script>
+	const headerEl = document.querySelector("#landing-header") as HTMLElement;
+
+	const observerOptions = {
+		root: null,
+		rootMargin: "0px", // en cuanto se vea el elemento
+		threshold: 0.9, // porcentaje de visibilidad
+	};
+
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			const { isIntersecting } = entry;
+			if (isIntersecting) {
+				const color = entry.target.getAttribute("data-header-color");
+				headerEl.style.color = color;
+			}
+		});
+	}, observerOptions);
+
+	const sectionElements = document.querySelectorAll(".landing-section");
+	sectionElements.forEach((section) => observer.observe(section));
+</script>
